@@ -34,18 +34,12 @@ jobs:
           EAS_BUILD_NO_EXPO_GO_WARNING: "true"
         run: npx eas-cli build --platform ios --profile production --wait
 
-      - name: Submit to TestFlight
-        env:
-          EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}
-          EXPO_APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
-        run: npx eas-cli submit --platform ios --profile production --latest --wait
-
       - name: Notify Telegram on Success
         if: success()
         run: |
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -d "text=✅ PostureCritic iOS build ${{ github.run_number }} submitted to TestFlight!"
+            -d "text=✅ PostureCritic iOS build ${{ github.run_number }} completed! Check EAS dashboard."
 
       - name: Notify Telegram on Failure
         if: failure()

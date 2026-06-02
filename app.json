@@ -3,6 +3,7 @@
     "name": "PostureCritic",
     "slug": "posture-critic",
     "version": "0.1.0",
+    "projectId": "8c3e0a0f-c8df-43e8-a084-8e0cab4a1bec",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
