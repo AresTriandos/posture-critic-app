@@ -1,0 +1,61 @@
+{
+  "expo": {
+    "name": "PostureCritic",
+    "slug": "posture-critic",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTabletMode": true,
+      "bundleIdentifier": "com.arestriandos.posture-critic",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSCameraUsageDescription": "PostureCritic uses your camera to analyze your posture and exercise form",
+        "NSPhotoLibraryUsageDescription": "PostureCritic needs access to your photos to analyze exercise videos",
+        "NSPhotoLibraryAddOnlyUsageDescription": "PostureCritic needs access to save your session videos"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.arestriandos.posture_critic",
+      "versionCode": 1,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "scheme": "posture-critic",
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "PostureCritic uses your camera to analyze your posture"
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "PostureCritic needs access to your photos",
+          "savePhotosPermission": "PostureCritic needs access to save videos",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ]
+  }
+}
