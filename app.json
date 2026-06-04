@@ -3,7 +3,6 @@
     "name": "PostureCritic",
     "slug": "posture-critic",
     "version": "0.1.0",
-    "projectId": "fe2859a2-ab03-4603-b916-93c6c98dcd0b",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -65,6 +64,8 @@
         "projectId": "855342a1-9dea-4c43-b7e6-ab223b9786ca"
       }
     },
+    "runtimeVersion": "0.1.0",
     "owner": "ares.triandos"
-  }
+  },
+  "projectId": "855342a1-9dea-4c43-b7e6-ab223b9786ca"
 }
