@@ -22,7 +22,8 @@
       "infoPlist": {
         "NSCameraUsageDescription": "PostureCritic uses your camera to analyze your posture and exercise form",
         "NSPhotoLibraryUsageDescription": "PostureCritic needs access to your photos to analyze exercise videos",
-        "NSPhotoLibraryAddOnlyUsageDescription": "PostureCritic needs access to save your session videos"
+        "NSPhotoLibraryAddOnlyUsageDescription": "PostureCritic needs access to save your session videos",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
