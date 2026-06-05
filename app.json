@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "PostureCritic",
+    "slug": "posture-critic",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTabletMode": true,
+      "bundleIdentifier": "com.arestriandos.posture-critic",
+      "deploymentTarget": "13.4",
+      "infoPlist": {
+        "NSCameraUsageDescription": "PostureCritic needs camera access to analyze your posture",
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.arestriandos.posture_critic"
+    },
+    "plugins": [
+      ["expo-camera", {"cameraPermission": "PostureCritic needs camera access to analyze your posture"}]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "855342a1-9dea-4c43-b7e6-ab223b9786ca"
+      }
+    },
+    "owner": "ares.triandos"
+  },
+  "projectId": "855342a1-9dea-4c43-b7e6-ab223b9786ca"
+}
