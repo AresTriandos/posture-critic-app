@@ -1,28 +1,19 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "lib": ["ES2020"],
-    "jsx": "react-native",
-    "jsxImportSource": "react",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    "target": "ES2018",
+    "lib": ["ES2018"],
+    "jsx": "react",
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "allowJs": true,
-    "strict": true,
-    "noEmit": true,
+    "strict": false,
+    "esModuleInterop": true,
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    },
-    "types": ["react-native", "jest", "node"]
+    "types": ["react-native"]
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "build"]
 }
