@@ -1,6 +1,6 @@
 {
   "name": "posture-critic-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "AI-powered posture analysis for gym, office, and correction exercises",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
