@@ -3,12 +3,21 @@
     "version": ">= 18.6.0",
     "appVersionSource": "remote"
   },
+  "env": {
+    "production": {
+      "COCOAPODS_DISABLE_STATS": "true",
+      "LANG": "en_US.UTF-8"
+    }
+  },
   "build": {
     "preview": {
       "distribution": "internal"
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "ios": {
+        "buildCache": false
+      }
     }
   },
   "submit": {
