@@ -2,7 +2,8 @@
   "name": "posture-critic-app",
   "version": "0.1.1",
   "description": "AI-powered posture analysis for gym, office, and correction exercises",
-  "main": "node_modules/expo/AppEntry.js",
+
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",

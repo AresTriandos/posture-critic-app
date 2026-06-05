@@ -17,7 +17,6 @@
     "ios": {
       "supportsTabletMode": true,
       "bundleIdentifier": "com.arestriandos.posture-critic",
-      "buildNumber": "1",
       "deploymentTarget": "13.4",
       "infoPlist": {
         "NSCameraUsageDescription": "PostureCritic uses your camera to analyze your posture and exercise form",
