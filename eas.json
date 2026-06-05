@@ -10,7 +10,11 @@
     },
     "production": {
       "autoIncrement": true,
-
+      "ios": {
+        "cache": {
+          "disabled": true
+        }
+      }
     }
   },
   "submit": {
