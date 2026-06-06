@@ -23,6 +23,6 @@ jobs:
         run: npm install -g eas-cli@latest
 
       - name: Build iOS
-        run: eas build --platform ios --non-interactive --wait
+        run: eas build --platform ios --non-interactive --wait --auto-submit
         env:
           EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}
