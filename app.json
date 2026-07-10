@@ -3,6 +3,7 @@
     "name": "PostureCritic",
     "slug": "posture-critic",
     "version": "0.1.0",
+    "scheme": "posturecritic",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -13,7 +14,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTabletMode": true,
+      "supportsTablet": true,
       "bundleIdentifier": "com.arestriandos.posture-critic",
       "deploymentTarget": "13.4",
       "infoPlist": {
@@ -29,6 +30,7 @@
       "package": "com.arestriandos.posture_critic"
     },
     "plugins": [
+      "expo-router",
       ["expo-camera", {"cameraPermission": "PostureCritic needs camera access to analyze your posture"}]
     ],
     "extra": {
