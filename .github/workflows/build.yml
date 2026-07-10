@@ -30,6 +30,11 @@ jobs:
           EAS_BUILD_NO_EXPO_GO_WARNING: 'true'
         run: npx eas-cli build --platform ios --profile production --wait
 
+      - name: Write App Store Connect API key
+        env:
+          ASC_API_KEY_BASE64: ${{ secrets.ASC_API_KEY_BASE64 }}
+        run: echo "$ASC_API_KEY_BASE64" | base64 --decode > AuthKey_27DQGSD97Y.p8
+
       - name: Submit to TestFlight
         env:
           EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}

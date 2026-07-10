@@ -19,7 +19,10 @@
       "ios": {
         "appleId": "annapolischiro@hotmail.com",
         "ascAppId": "6775954879",
-        "appleTeamId": "L82V95LG93"
+        "appleTeamId": "L82V95LG93",
+        "ascApiKeyPath": "./AuthKey_27DQGSD97Y.p8",
+        "ascApiKeyId": "27DQGSD97Y",
+        "ascApiKeyIssuerId": "dcaba0fb-26e9-463e-b6fe-88be9c4e7d3a"
       }
     }
   }
