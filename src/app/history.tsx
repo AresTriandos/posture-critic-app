@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { Button } from '@/components/button';
 import { Colors, Spacing, Typography, BorderRadius } from '@/constants/theme';
-import { getVideoRecords, deleteVideoRecord, VideoRecord } from '@/services/camera';
+import { getPhotoRecords, deletePhotoRecord, PhotoRecord } from '@/services/camera';
 
 export default function HistoryScreen() {
   const router = useRouter();
@@ -15,39 +15,39 @@ export default function HistoryScreen() {
   const isDark = colorScheme === 'dark';
   const colors = isDark ? Colors.dark : Colors.light;
 
-  const [videos, setVideos] = useState<VideoRecord[]>([]);
+  const [photos, setPhotos] = useState<PhotoRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Reload videos when screen is focused
+  // Reload photos when screen is focused
   useFocusEffect(
     React.useCallback(() => {
-      loadVideos();
+      loadPhotos();
     }, [])
   );
 
-  const loadVideos = async () => {
+  const loadPhotos = async () => {
     try {
       setIsLoading(true);
-      const records = await getVideoRecords();
-      setVideos(records);
+      const records = await getPhotoRecords();
+      setPhotos(records);
     } catch (error) {
-      console.error('Failed to load videos:', error);
-      Alert.alert('Error', 'Failed to load video history');
+      console.error('Failed to load photos:', error);
+      Alert.alert('Error', 'Failed to load photo history');
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleDelete = (id: string) => {
-    Alert.alert('Delete Video', 'Are you sure you want to delete this video?', [
+    Alert.alert('Delete Photo', 'Are you sure you want to delete this photo?', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Delete',
         style: 'destructive',
         onPress: async () => {
-          const deleted = await deleteVideoRecord(id);
+          const deleted = await deletePhotoRecord(id);
           if (deleted) {
-            setVideos((prev) => prev.filter((v) => v.id !== id));
+            setPhotos((prev) => prev.filter((p) => p.id !== id));
           }
         },
       },
@@ -63,13 +63,6 @@ export default function HistoryScreen() {
       hour: '2-digit',
       minute: '2-digit',
     });
-  };
-
-  const formatDuration = (seconds?: number) => {
-    if (!seconds) return 'N/A';
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
   return (
@@ -116,10 +109,10 @@ export default function HistoryScreen() {
               Loading...
             </Text>
           </View>
-        ) : videos.length === 0 ? (
+        ) : photos.length === 0 ? (
           <View style={{ alignItems: 'center', paddingVertical: Spacing['3xl'] }}>
             <Ionicons
-              name="videocam-off"
+              name="camera-outline"
               size={64}
               color={colors.textTertiary}
               style={{ marginBottom: Spacing.lg }}
@@ -132,7 +125,7 @@ export default function HistoryScreen() {
                 textAlign: 'center',
               }}
             >
-              No videos yet
+              No photos yet
             </Text>
             <Text
               style={{
@@ -142,10 +135,10 @@ export default function HistoryScreen() {
                 marginBottom: Spacing.xl,
               }}
             >
-              Record your first workout to get started
+              Take your first posture photo to get started
             </Text>
             <Button
-              label="Record Workout"
+              label="Take Photo"
               onPress={() => router.push('/camera')}
               variant="primary"
               size="lg"
@@ -161,12 +154,12 @@ export default function HistoryScreen() {
                 marginBottom: Spacing.md,
               }}
             >
-              {videos.length} video{videos.length !== 1 ? 's' : ''}
+              {photos.length} photo{photos.length !== 1 ? 's' : ''}
             </Text>
 
-            {videos.map((video) => (
+            {photos.map((photo) => (
               <View
-                key={video.id}
+                key={photo.id}
                 style={{
                   backgroundColor: colors.surface,
                   borderRadius: BorderRadius.md,
@@ -189,7 +182,7 @@ export default function HistoryScreen() {
                     flexShrink: 0,
                   }}
                 >
-                  <Ionicons name="videocam" size={28} color="#FFFFFF" />
+                  <Ionicons name="camera" size={28} color="#FFFFFF" />
                 </View>
 
                 <View style={{ flex: 1 }}>
@@ -200,20 +193,12 @@ export default function HistoryScreen() {
                       marginBottom: Spacing.xs,
                     }}
                   >
-                    {formatDate(video.timestamp)}
-                  </Text>
-                  <Text
-                    style={{
-                      ...Typography.bodySmall,
-                      color: colors.textSecondary,
-                    }}
-                  >
-                    Duration: {formatDuration(video.duration)}
+                    {formatDate(photo.timestamp)}
                   </Text>
                 </View>
 
                 <TouchableOpacity
-                  onPress={() => handleDelete(video.id)}
+                  onPress={() => handleDelete(photo.id)}
                   style={{
                     width: 40,
                     height: 40,

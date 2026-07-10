@@ -1,17 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, useColorScheme, Alert, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, useColorScheme, Alert } from 'react-native';
 import { CameraView } from 'expo-camera';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Timer } from '@/components/timer';
 import { Button } from '@/components/button';
 import { Colors, Spacing, BorderRadius, Typography } from '@/constants/theme';
 import {
   checkCameraPermission,
   requestCameraPermission,
-  saveVideoRecord,
-  generateVideoId,
+  savePhotoRecord,
+  generatePhotoId,
 } from '@/services/camera';
 
 export default function CameraScreen() {
@@ -21,8 +20,7 @@ export default function CameraScreen() {
   const colors = isDark ? Colors.dark : Colors.light;
 
   const cameraRef = useRef<CameraView>(null);
-  const [isRecording, setIsRecording] = useState(false);
-  const [recordingTime, setRecordingTime] = useState(0);
+  const [isCapturing, setIsCapturing] = useState(false);
   const [hasPermission, setHasPermission] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [cameraReady, setCameraReady] = useState(false);
@@ -49,56 +47,36 @@ export default function CameraScreen() {
     }
   };
 
-  const startRecording = async () => {
-    if (!cameraRef.current || !cameraReady) {
+  const capturePhoto = async () => {
+    if (!cameraRef.current || !cameraReady || isCapturing) {
       Alert.alert('Camera Not Ready', 'Please wait for the camera to initialize');
       return;
     }
 
     try {
-      setIsRecording(true);
-      const video = await cameraRef.current.recordAsync();
+      setIsCapturing(true);
+      const photo = await cameraRef.current.takePictureAsync({ quality: 0.8 });
 
-      if (video?.uri) {
-        // Save video record
+      if (photo?.uri) {
         const record = {
-          id: generateVideoId(),
-          uri: video.uri,
+          id: generatePhotoId(),
+          uri: photo.uri,
           timestamp: Date.now(),
-          duration: recordingTime,
         };
 
-        const saved = await saveVideoRecord(record);
+        const saved = await savePhotoRecord(record);
         if (saved) {
-          Alert.alert('Success', 'Video saved successfully');
+          Alert.alert('Success', 'Photo saved successfully');
           router.push('/history');
         } else {
-          Alert.alert('Error', 'Failed to save video');
+          Alert.alert('Error', 'Failed to save photo');
         }
       }
     } catch (error) {
-      console.error('Recording failed:', error);
-      Alert.alert('Recording Error', 'Failed to save video. Please try again.');
-      setIsRecording(false);
-    }
-  };
-
-  const stopRecording = async () => {
-    if (cameraRef.current) {
-      try {
-        await cameraRef.current.stopRecording();
-        setIsRecording(false);
-      } catch (error) {
-        console.error('Stop recording failed:', error);
-      }
-    }
-  };
-
-  const handleRecordPress = () => {
-    if (isRecording) {
-      stopRecording();
-    } else {
-      startRecording();
+      console.error('Capture failed:', error);
+      Alert.alert('Capture Error', 'Failed to save photo. Please try again.');
+    } finally {
+      setIsCapturing(false);
     }
   };
 
@@ -188,10 +166,7 @@ export default function CameraScreen() {
               <Text style={{ fontSize: 24 }}>✕</Text>
             </TouchableOpacity>
 
-            {/* Middle: Timer */}
-            {isRecording && <Timer isActive={isRecording} onTick={setRecordingTime} />}
-
-            {/* Bottom: Record/Stop button */}
+            {/* Bottom: Capture button */}
             <View
               style={{
                 flexDirection: 'row',
@@ -204,16 +179,16 @@ export default function CameraScreen() {
                   width: 70,
                   height: 70,
                   borderRadius: BorderRadius.full,
-                  backgroundColor: isRecording ? colors.danger : colors.primary,
+                  backgroundColor: isCapturing ? colors.danger : colors.primary,
                   justifyContent: 'center',
                   alignItems: 'center',
                   borderWidth: 4,
                   borderColor: 'rgba(255, 255, 255, 0.3)',
                 }}
-                onPress={handleRecordPress}
-                disabled={!cameraReady}
+                onPress={capturePhoto}
+                disabled={!cameraReady || isCapturing}
               >
-                <Text style={{ fontSize: 32 }}>{isRecording ? '⊢' : '●'}</Text>
+                <Text style={{ fontSize: 32 }}>●</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -222,5 +197,3 @@ export default function CameraScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({});

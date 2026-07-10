@@ -1,11 +1,10 @@
 import * as Camera from 'expo-camera';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export interface VideoRecord {
+export interface PhotoRecord {
   id: string;
   uri: string;
   timestamp: number;
-  duration?: number;
   analysis?: string;
 }
 
@@ -36,51 +35,51 @@ export async function checkCameraPermission() {
 }
 
 /**
- * Save video record to AsyncStorage
+ * Save photo record to AsyncStorage
  */
-export async function saveVideoRecord(record: VideoRecord) {
+export async function savePhotoRecord(record: PhotoRecord) {
   try {
-    const existing = await getVideoRecords();
+    const existing = await getPhotoRecords();
     const updated = [record, ...existing];
-    await AsyncStorage.setItem('video_records', JSON.stringify(updated));
+    await AsyncStorage.setItem('photo_records', JSON.stringify(updated));
     return true;
   } catch (error) {
-    console.error('Failed to save video record:', error);
+    console.error('Failed to save photo record:', error);
     return false;
   }
 }
 
 /**
- * Get all saved video records
+ * Get all saved photo records
  */
-export async function getVideoRecords(): Promise<VideoRecord[]> {
+export async function getPhotoRecords(): Promise<PhotoRecord[]> {
   try {
-    const data = await AsyncStorage.getItem('video_records');
+    const data = await AsyncStorage.getItem('photo_records');
     return data ? JSON.parse(data) : [];
   } catch (error) {
-    console.error('Failed to get video records:', error);
+    console.error('Failed to get photo records:', error);
     return [];
   }
 }
 
 /**
- * Delete a video record
+ * Delete a photo record
  */
-export async function deleteVideoRecord(id: string) {
+export async function deletePhotoRecord(id: string) {
   try {
-    const existing = await getVideoRecords();
+    const existing = await getPhotoRecords();
     const filtered = existing.filter((r) => r.id !== id);
-    await AsyncStorage.setItem('video_records', JSON.stringify(filtered));
+    await AsyncStorage.setItem('photo_records', JSON.stringify(filtered));
     return true;
   } catch (error) {
-    console.error('Failed to delete video record:', error);
+    console.error('Failed to delete photo record:', error);
     return false;
   }
 }
 
 /**
- * Generate unique ID for video
+ * Generate unique ID for photo
  */
-export function generateVideoId() {
-  return `video_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+export function generatePhotoId() {
+  return `photo_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 }

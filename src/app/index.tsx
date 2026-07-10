@@ -25,7 +25,7 @@ const FEATURES = [
   {
     icon: 'shield-checkmark' as const,
     title: 'Private Training',
-    description: 'Your videos stay secure locally',
+    description: 'Your photos stay secure locally',
   },
 ];
 
@@ -97,7 +97,7 @@ export default function HomeScreen() {
         {/* CTA Button */}
         <Link href="/camera" asChild>
           <Button
-            label="📹 Record Workout"
+            label="📷 Take Photo"
             onPress={() => {}}
             variant="primary"
             size="lg"
