@@ -30,5 +30,10 @@ jobs:
           EAS_BUILD_NO_EXPO_GO_WARNING: 'true'
         run: npx eas-cli build --platform ios --profile production --wait
 
+      - name: Submit to TestFlight
+        env:
+          EXPO_TOKEN: ${{ secrets.EAS_TOKEN }}
+        run: npx eas-cli submit --platform ios --profile production --latest --non-interactive
+
       - name: Build completed
-        run: echo "✅ iOS build completed successfully"
+        run: echo "✅ iOS build submitted to TestFlight successfully"
