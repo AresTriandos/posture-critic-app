@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { TouchableOpacity, Text, StyleSheet, useColorScheme, ViewStyle } from 'react-native';
 import { Colors, Spacing, BorderRadius, Typography } from '@/constants/theme';
 
@@ -11,15 +12,10 @@ interface ButtonProps {
   style?: ViewStyle;
 }
 
-export function Button({
-  label,
-  onPress,
-  variant = 'primary',
-  size = 'md',
-  disabled = false,
-  icon,
-  style,
-}: ButtonProps) {
+export const Button = forwardRef<any, ButtonProps>(function Button(
+  { label, onPress, variant = 'primary', size = 'md', disabled = false, icon, style },
+  ref
+) {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
   const colors = isDark ? Colors.dark : Colors.light;
@@ -54,6 +50,7 @@ export function Button({
   if (variant === 'danger') {
     return (
       <TouchableOpacity
+        ref={ref}
         style={[
           buttonStyles,
           {
@@ -74,6 +71,7 @@ export function Button({
   if (variant === 'primary') {
     return (
       <TouchableOpacity
+        ref={ref}
         style={[
           buttonStyles,
           {
@@ -94,6 +92,7 @@ export function Button({
   if (variant === 'secondary') {
     return (
       <TouchableOpacity
+        ref={ref}
         style={[
           buttonStyles,
           {
@@ -116,6 +115,7 @@ export function Button({
   // Tertiary variant
   return (
     <TouchableOpacity
+      ref={ref}
       style={[buttonStyles, { backgroundColor: 'transparent' }, style]}
       onPress={onPress}
       disabled={disabled}
@@ -125,4 +125,4 @@ export function Button({
       <Text style={{ ...textStyles, color: colors.primary }}>{label}</Text>
     </TouchableOpacity>
   );
-}
+});

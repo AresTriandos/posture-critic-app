@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, useColorScheme, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 
 import { Button } from '@/components/button';
 import { Colors, Spacing, Typography, BorderRadius } from '@/constants/theme';
@@ -30,6 +30,7 @@ const FEATURES = [
 ];
 
 export default function HomeScreen() {
+  const router = useRouter();
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
   const colors = isDark ? Colors.dark : Colors.light;
@@ -95,17 +96,15 @@ export default function HomeScreen() {
         </View>
 
         {/* CTA Button */}
-        <Link href="/camera" asChild>
-          <Button
-            label="📷 Take a photo of your posture"
-            onPress={() => {}}
-            variant="primary"
-            size="lg"
-            style={{
-              marginBottom: Spacing['2xl'],
-            }}
-          />
-        </Link>
+        <Button
+          label="📷 Take a photo of your posture"
+          onPress={() => router.push('/camera')}
+          variant="primary"
+          size="lg"
+          style={{
+            marginBottom: Spacing['2xl'],
+          }}
+        />
 
         {/* Features */}
         <View
@@ -177,15 +176,13 @@ export default function HomeScreen() {
         </View>
 
         {/* Secondary CTA */}
-        <Link href="/history" asChild>
-          <Button
-            label="View History"
-            onPress={() => {}}
-            variant="secondary"
-            size="md"
-            icon={<Ionicons name="time" size={18} color={colors.primary} />}
-          />
-        </Link>
+        <Button
+          label="View History"
+          onPress={() => router.push('/history')}
+          variant="secondary"
+          size="md"
+          icon={<Ionicons name="time" size={18} color={colors.primary} />}
+        />
       </ScrollView>
     </SafeAreaView>
   );
