@@ -8,11 +8,11 @@ import { Platform } from 'react-native';
 export const Colors = {
   light: {
     // Primary brand
-    primary: '#8B3A8B',       // Deep purple (body-focused)
-    primaryLight: '#A855F7',  // Vibrant purple
+    primary: '#1F6F8E',       // Aegean blue
+    primaryLight: '#3E92CC',  // Lighter Aegean blue
     
     // Accents
-    accent: '#EC4899',        // Energy pink
+    accent: '#123B4F',        // Deep sea blue
     success: '#10B981',       // Green (correct form)
     warning: '#F59E0B',       // Amber (caution)
     danger: '#EF4444',        // Red (incorrect form)
@@ -33,11 +33,11 @@ export const Colors = {
   },
   dark: {
     // Primary brand
-    primary: '#C084FC',       // Bright purple for dark mode
-    primaryLight: '#D8B4FE',  // Lighter purple
+    primary: '#3E92CC',       // Bright Aegean blue for dark mode
+    primaryLight: '#7FB3CC',  // Lighter Aegean blue
     
     // Accents
-    accent: '#F472B6',        // Lighter pink
+    accent: '#9CC4D8',        // Pale sky blue
     success: '#34D399',       // Green
     warning: '#FBBF24',       // Amber
     danger: '#F87171',        // Red

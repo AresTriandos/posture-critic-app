@@ -1,33 +1,10 @@
-import { View, Text, ScrollView, useColorScheme, Image } from 'react-native';
+import { View, Text, ScrollView, useColorScheme, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
 import { Button } from '@/components/button';
 import { Colors, Spacing, Typography, BorderRadius } from '@/constants/theme';
-
-const FEATURES = [
-  {
-    icon: 'body' as const,
-    title: 'Real-time Analysis',
-    description: 'AI analyzes your posture as you move',
-  },
-  {
-    icon: 'checkmark-circle' as const,
-    title: 'Form Correction',
-    description: 'Get instant feedback on body alignment',
-  },
-  {
-    icon: 'bar-chart' as const,
-    title: 'Progress Tracking',
-    description: 'Monitor improvements over time',
-  },
-  {
-    icon: 'shield-checkmark' as const,
-    title: 'Private Training',
-    description: 'Your photos stay secure locally',
-  },
-];
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -50,32 +27,28 @@ export default function HomeScreen() {
           paddingBottom: Spacing['3xl'],
         }}
       >
-        {/* Hero Section */}
+        {/* Logo + title */}
         <View
           style={{
-            marginBottom: Spacing['3xl'],
+            marginBottom: Spacing['2xl'],
             alignItems: 'center',
           }}
         >
-          <View
+          <Image
+            source={require('../../assets/icon.png')}
             style={{
-              width: 80,
-              height: 80,
+              width: 96,
+              height: 96,
               borderRadius: BorderRadius.xl,
-              backgroundColor: colors.primary,
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginBottom: Spacing.xl,
+              marginBottom: Spacing.lg,
             }}
-          >
-            <Ionicons name="body" size={40} color="#FFFFFF" />
-          </View>
+          />
 
           <Text
             style={{
               ...Typography.displaySmall,
               color: colors.text,
-              marginBottom: Spacing.md,
+              marginBottom: Spacing.xs,
               textAlign: 'center',
             }}
           >
@@ -84,105 +57,110 @@ export default function HomeScreen() {
 
           <Text
             style={{
-              ...Typography.bodyLarge,
+              ...Typography.bodyMedium,
               color: colors.textSecondary,
               textAlign: 'center',
-              marginBottom: Spacing.xl,
-              lineHeight: 24,
             }}
           >
-            AI-powered posture and form analyzer for perfect alignment
+            AI posture evaluation and coaching
           </Text>
         </View>
 
-        {/* CTA Button */}
+        {/* Primary CTA */}
         <Button
           label="📷 Take a photo of your posture"
           onPress={() => router.push('/camera')}
           variant="primary"
           size="lg"
           style={{
-            marginBottom: Spacing['2xl'],
+            marginBottom: Spacing.md,
           }}
         />
 
-        {/* Features */}
+        {/* How it works */}
         <View
           style={{
+            flexDirection: 'row',
             gap: Spacing.md,
-            marginBottom: Spacing.xl,
+            backgroundColor: colors.surface,
+            padding: Spacing.lg,
+            borderRadius: BorderRadius.md,
+            borderWidth: 1,
+            borderColor: colors.border,
+            marginBottom: Spacing.md,
           }}
         >
-          <Text
-            style={{
-              ...Typography.headingSmall,
-              color: colors.text,
-              marginBottom: Spacing.md,
-            }}
-          >
-            Why PostureCritic?
-          </Text>
-
-          {FEATURES.map((feature, index) => (
-            <View
-              key={index}
+          <Ionicons
+            name="help-circle-outline"
+            size={22}
+            color={colors.primary}
+            style={{ marginTop: 2 }}
+          />
+          <View style={{ flex: 1 }}>
+            <Text
               style={{
-                flexDirection: 'row',
-                alignItems: 'flex-start',
-                gap: Spacing.lg,
-                backgroundColor: colors.surface,
-                padding: Spacing.lg,
-                borderRadius: BorderRadius.md,
-                borderWidth: 1,
-                borderColor: colors.border,
+                ...Typography.labelLarge,
+                color: colors.text,
+                marginBottom: Spacing.xs,
               }}
             >
-              <View
-                style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: BorderRadius.md,
-                  backgroundColor: colors.primary,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flexShrink: 0,
-                }}
-              >
-                <Ionicons name={feature.icon} size={24} color="#FFFFFF" />
-              </View>
-
-              <View style={{ flex: 1 }}>
-                <Text
-                  style={{
-                    ...Typography.labelLarge,
-                    color: colors.text,
-                    marginBottom: Spacing.xs,
-                  }}
-                >
-                  {feature.title}
-                </Text>
-                <Text
-                  style={{
-                    ...Typography.bodySmall,
-                    color: colors.textSecondary,
-                    lineHeight: 18,
-                  }}
-                >
-                  {feature.description}
-                </Text>
-              </View>
-            </View>
-          ))}
+              How it works
+            </Text>
+            <Text
+              style={{
+                ...Typography.bodySmall,
+                color: colors.textSecondary,
+                lineHeight: 18,
+              }}
+            >
+              Take a photo from the side or front of you standing or sitting at your desk to
+              get a posture evaluation and recommendations.
+            </Text>
+          </View>
         </View>
 
-        {/* Secondary CTA */}
-        <Button
-          label="View History"
+        {/* Progress tracking */}
+        <TouchableOpacity
           onPress={() => router.push('/history')}
-          variant="secondary"
-          size="md"
-          icon={<Ionicons name="time" size={18} color={colors.primary} />}
-        />
+          activeOpacity={0.8}
+          style={{
+            flexDirection: 'row',
+            gap: Spacing.md,
+            backgroundColor: colors.surface,
+            padding: Spacing.lg,
+            borderRadius: BorderRadius.md,
+            borderWidth: 1,
+            borderColor: colors.border,
+          }}
+        >
+          <Ionicons
+            name="trending-up-outline"
+            size={22}
+            color={colors.primary}
+            style={{ marginTop: 2 }}
+          />
+          <View style={{ flex: 1 }}>
+            <Text
+              style={{
+                ...Typography.labelLarge,
+                color: colors.text,
+                marginBottom: Spacing.xs,
+              }}
+            >
+              Progress tracking
+            </Text>
+            <Text
+              style={{
+                ...Typography.bodySmall,
+                color: colors.textSecondary,
+                lineHeight: 18,
+              }}
+            >
+              Review past photos and improvements over time. All photos are stored locally on
+              your device.
+            </Text>
+          </View>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
