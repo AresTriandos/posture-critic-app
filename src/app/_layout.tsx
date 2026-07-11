@@ -4,7 +4,7 @@ export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ title: 'PostureCritic' }} />
-      <Stack.Screen name="camera" options={{ title: 'Record Posture' }} />
+      <Stack.Screen name="camera" options={{ title: 'Take Photo of Posture' }} />
     </Stack>
   );
 }

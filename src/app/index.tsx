@@ -97,7 +97,7 @@ export default function HomeScreen() {
         {/* CTA Button */}
         <Link href="/camera" asChild>
           <Button
-            label="📷 Take Photo"
+            label="📷 Take a photo of your posture"
             onPress={() => {}}
             variant="primary"
             size="lg"
